@@ -25,6 +25,11 @@ build: $(addprefix downloads/,$(PKGS))
 		--inifile=x86_64/setup.ini \
 		--releasearea=. \
 		--disable-check=missing-required-package,missing-depended-package
+	gpg --local-user 565EA3DDF4DF90C056894467D299701EAA73A441 --detach-sign x86_64/setup.ini
+	bzip2 < x86_64/setup.ini > x86_64/setup.bz2
+	gpg --local-user 565EA3DDF4DF90C056894467D299701EAA73A441 --detach-sign x86_64/setup.bz2
+	xz -6e < x86_64/setup.ini > x86_64/setup.xz
+	gpg --local-user 565EA3DDF4DF90C056894467D299701EAA73A441 --detach-sign x86_64/setup.xz
 
 upload: build
 	rsync -avz --progress --omit-dir-times \
