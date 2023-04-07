@@ -1,4 +1,4 @@
-PKGS=luajit
+PKGS=luajit luajit-lpeg
 
 -include local.mak
 
