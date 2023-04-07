@@ -1,24 +1,18 @@
-PKGS=\
-	 luajit-dist-2.1.0_beta3_20230221-3.x86_64.tar.xz
+PKGS=luajit
 
 -include local.mak
 
-define download_package
-	$(eval PKG_FILENAME = $(notdir $@))
-	$(eval PKG_NAME = $(firstword $(subst -dist-, ,$(PKG_FILENAME))))
-	$(eval PKG_VERSION = $(patsubst $(PKG_NAME)-dist-%.x86_64.tar.xz,%,$(PKG_FILENAME)))
-	mkdir -p $(dir $@)
-	wget -P $(dir $@)/ "https://github.com/kgraefe/$(PKG_NAME)-cygwin/releases/download/$(PKG_VERSION)/$(PKG_FILENAME)"
-endef
-
-downloads/%.tar.xz:
-	$(call download_package,$@)
-
-build: $(addprefix downloads/,$(PKGS))
+build:
 	rm -rf x86_64
 	mkdir -p x86_64/release
-	for pkg in $(PKGS); do \
-		tar xJvf "downloads/$$pkg" -C x86_64/release/ ; \
+	set -x; \
+	for PKT in $(PKGS); do \
+		URL=$$( \
+			curl https://api.github.com/repos/kgraefe/$$PKT-cygwin/releases/latest \
+			| jq -r '.assets[] | select(.name | test("-dist-")).browser_download_url' \
+		); \
+		test -z "$$URL" && exit 1; \
+		curl -L "$$URL" | tar -C x86_64/release/ -xJv ; \
 	done
 	mksetupini \
 		--arch x86_64 \
@@ -39,4 +33,4 @@ upload: build
 		--delete
 
 clean:
-	rm -rf x86_64 downloads
+	rm -rf x86_64
