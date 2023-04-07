@@ -23,6 +23,7 @@ build: $(addprefix downloads/,$(PKGS))
 	mksetupini \
 		--arch x86_64 \
 		--inifile=x86_64/setup.ini \
+		--release=cygwin.paktolos.net \
 		--releasearea=. \
 		--disable-check=missing-required-package,missing-depended-package
 	gpg --local-user 565EA3DDF4DF90C056894467D299701EAA73A441 --detach-sign x86_64/setup.ini
