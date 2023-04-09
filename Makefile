@@ -1,4 +1,4 @@
-PKGS=luajit luajit-lpeg luajit-mpack msgpack-c
+PKGS=luajit luajit-lpeg luajit-mpack msgpack-c libluv
 
 GREEN="$(shell tput setaf 2)"
 NORMAL="\\e[0m"
