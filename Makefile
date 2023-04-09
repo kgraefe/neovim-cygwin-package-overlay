@@ -1,4 +1,12 @@
-PKGS=luajit luajit-lpeg luajit-mpack msgpack-c libluv unibilium libtermkey
+PKGS=\
+	 luajit \
+	 luajit-lpeg \
+	 luajit-mpack \
+	 msgpack-c \
+	 libluv \
+	 unibilium \
+	 libtermkey \
+	 libvterm \
 
 GREEN="$(shell tput setaf 2)"
 NORMAL="\\e[0m"
