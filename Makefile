@@ -1,4 +1,4 @@
-PKGS=luajit luajit-lpeg luajit-mpack
+PKGS=luajit luajit-lpeg luajit-mpack msgpack-c
 
 GREEN="$(shell tput setaf 2)"
 NORMAL="\\e[0m"
