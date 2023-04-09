@@ -7,6 +7,7 @@ PKGS=\
 	 unibilium \
 	 libtermkey \
 	 libvterm \
+	 neovim \
 
 GREEN="$(shell tput setaf 2)"
 NORMAL="\\e[0m"
