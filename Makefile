@@ -47,7 +47,7 @@ build: clean
 upload: build
 	$(Q)@printf "$(GREEN)=== Upload all the things ===$(NORMAL)\n"
 	rsync -avz --progress --omit-dir-times \
-		index.html x86_64 \
+		index.html bootstrap*.css x86_64 \
 		www-data@paktolos:/var/www/paktolos.net/cygwin/ \
 		--delete
 
